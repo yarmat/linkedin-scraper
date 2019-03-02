@@ -34,7 +34,7 @@ foreach ($sites as $site) {
         $crawler = new SiteCrawler($crawler);
         $link = $crawler->get();
     } catch (\Exception $e) {
-        echo $e->getMessage();
+        echo $e->getMessage() . "\n";
         continue;
     }
 
@@ -69,7 +69,10 @@ foreach ($companies as $company) {
             'founded'        => isset($company['foundedOn']) ? $company['foundedOn']['year'] : null,
             'specialties'    => isset($company['specialities']) ? implode(', ', $company['specialities']) : null,
         ]);
+
 }
+
+echo "Script is finished \n";
 
 
 
