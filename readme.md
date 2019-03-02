@@ -10,7 +10,16 @@ Step 2
 composer install
 </pre>
 
-Step 3 (Run Script)
+Step 3
+
+Fill login and password from LinkedIn
+<pre>
+config/linkedin.php
+</pre>
+
+Step 4 (Run Script)
 ```php
 php index.php
 ```
+
+![screenshot](screenshot.png)
