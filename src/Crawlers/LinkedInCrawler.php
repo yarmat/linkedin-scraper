@@ -17,7 +17,8 @@ class LinkedInCrawler
         'description',
         'staffCountRange',
         'companyType',
-        'localizedName'
+        'localizedName',
+        'foundedOn'
     ];
 
     public function __construct(Crawler $data)

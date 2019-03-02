@@ -17,7 +17,30 @@ Fill login and password from LinkedIn
 config/linkedin.php
 </pre>
 
-Step 4 (Run Script)
+Step 4
+
+Fill db field settings
+<pre>
+config/db.php
+</pre>
+
+Step 5
+
+Rename table name
+<pre>
+src/Models/Company.php
+</pre>
+```php
+<?php 
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class Company extends Model
+{
+    protected $table = 'companies';
+```
+
+Step 6 (Run Script)
 ```php
 php index.php
 ```
