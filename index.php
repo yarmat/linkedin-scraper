@@ -20,25 +20,38 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+//www.alternanet.it
+//www.siriuscom.com
+//www.am-computer.com
+$sites = (Company::select(['url'])->whereNull('name')->orWhere('name', '')->take(100)->get())->toArray();
+
+if (count($sites) < 1) {
+    echo "Script is finished \n";
+    die;
+}
 
 $siteClient = (new \App\Clients\SiteClient())->get();
 $linkedInClient = (new \App\Clients\LinkedInClient())->get();
 
-$sites = (Company::select(['url'])->get())->toArray();
+
 
 $companies = [];
 
 foreach ($sites as $site) {
     try {
-        $crawler = $siteClient->request('GET', $site['url']);
+        $crawler = $siteClient->request('GET', 'http://' . $site['url']);
         $crawler = new SiteCrawler($crawler);
         $link = $crawler->get();
     } catch (\Exception $e) {
         echo $e->getMessage() . "\n";
+        $companies[] = [
+            'url'  => $site['url'],
+            'name' => 'none found'
+        ];
         continue;
     }
 
-    $crawler = $linkedInClient->request('GET', $link . '/about');
+    $crawler = $linkedInClient->request('GET', $link);
     $crawler = new LinkedInCrawler($crawler);
 
     $company = $crawler->get();
@@ -46,10 +59,10 @@ foreach ($sites as $site) {
 
     $companies[] = $company;
 
+    sleep(3);
 }
 
 foreach ($companies as $company) {
-
     $location = null;
     if (isset($company['confirmedLocations'][0])) {
         $location = $company['confirmedLocations'][0];

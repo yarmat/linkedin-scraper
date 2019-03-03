@@ -34,7 +34,7 @@ class SiteCrawler
 
         $link = parse_url($links[0]);
 
-        $link = 'https://linkedin.com' . $link['path'];
+        $link = 'https://www.linkedin.com' . $link['path'];
 
         return $link;
 
