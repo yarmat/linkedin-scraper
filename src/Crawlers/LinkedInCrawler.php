@@ -19,7 +19,8 @@ class LinkedInCrawler
         'companyType',
         'localizedName',
         'foundedOn',
-        'phone'
+        'phone',
+        'confirmedLocations'
     ];
 
     public function __construct(Crawler $data)
