@@ -64,23 +64,24 @@ foreach ($sites as $site) {
 
 foreach ($companies as $company) {
     $location = null;
-    if (isset($company['confirmedLocations'][0])) {
-        $location = $company['confirmedLocations'][0];
+    if (isset($company['headquarter'])) {
+        $location = $company['headquarter'];
         $location = $location['line1'] . ', ' . $location['city'] . ', ' . $location['geographicArea'] . ' ' . $location['postalCode'] . ', ' . $location['country'];
     }
 
     Company::where('url', $company['url'])
         ->update([
-            'name'           => $company['name'],
-            'category'       => isset($company['localizedName']) ? $company['localizedName'] : null,
-            'location'       => $location,
-            'followers'      => isset($company['followerCount']) ? $company['followerCount'] . ' followers' : null,
+            'name'         => $company['name'],
+            'category'     => isset($company['localizedName']) ? $company['localizedName'] : null,
+            'location'     => $location,
+            'followers'    => isset($company['followerCount']) ? $company['followerCount'] . ' followers' : null,
             'employee_count' => isset($company['staffCount']) ? $company['staffCount'] . ' staff on linked in' : null,
             'overview'       => isset($company['description']) ? $company['description'] : null,
-            'company_size'   => isset($company['staffCountRange']) ? $company['staffCountRange']['start'] . ' - ' . $company['staffCountRange']['end'] . ' staff' : null,
-            'type'           => isset($company['companyType']) ? $company['companyType']['localizedName'] : null,
-            'founded'        => isset($company['foundedOn']) ? $company['foundedOn']['year'] : null,
-            'specialties'    => isset($company['specialities']) ? implode(', ', $company['specialities']) : null,
+            'company_size' => isset($company['staffCountRange']) ? $company['staffCountRange']['start'] . ' - ' . $company['staffCountRange']['end'] . ' staff' : null,
+            'type'         => isset($company['companyType']) ? $company['companyType']['localizedName'] : null,
+            'founded'      => isset($company['foundedOn']) ? $company['foundedOn']['year'] : null,
+            'specialties'  => isset($company['specialities']) ? implode(', ', $company['specialities']) : null,
+            'phone'        => isset($company['phone']) ? $company['phone']['number'] : null,
         ]);
 
 }

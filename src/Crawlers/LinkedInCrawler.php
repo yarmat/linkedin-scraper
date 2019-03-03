@@ -13,12 +13,13 @@ class LinkedInCrawler
         'followerCount',
         'staffCount',
         'specialities',
-        'confirmedLocations',
+        'headquarter',
         'description',
         'staffCountRange',
         'companyType',
         'localizedName',
-        'foundedOn'
+        'foundedOn',
+        'phone'
     ];
 
     public function __construct(Crawler $data)
@@ -49,7 +50,7 @@ class LinkedInCrawler
         $companyId = null;
         foreach ($included as $array) {
             if (is_array($array)) {
-//                dump($array);
+
                 foreach ($array as $key => $item) {
 
                     if ($key == 'localizedName') $companyInfo[$key] = $item;
